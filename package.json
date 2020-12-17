@@ -1,0 +1,20 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "API Packages",
+  "main": "index.js",
+  "repository":{
+    "type": "git",
+    "url": "https://github.com/24belenp/PAQUETES.git"
+  },
+  "homepage": "https://github.com/24belenp/PAQUETES",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Belén Paredes",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

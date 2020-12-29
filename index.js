@@ -70,7 +70,7 @@ app.put(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
 });
 
 
-// METODO DELETE PARA BORRAR ELEMENTOS DE PAQUETE
+// METODO DELETE PARA BORRAR TODOS LOS PAQUETES
 app.delete(BASE_API_PATH + '/packages', (req, res)=>{
     //var producte = productes.find(a =>a.categoria===parseInt(req.params.categoria));
     //var index =productes.indexOf(producte);

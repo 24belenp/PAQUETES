@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var DataStore = require('nedb');
 
-var port = 4050;
+var port = (process.env.PORT || 4050);
 var BASE_API_PATH = "/api/v1";
 var DB_FILE_NAME= __dirname + "/packages.json";
 
@@ -58,7 +58,7 @@ app.put(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
     var actu = req.params.code; 
     console.log(Date() + " - PUT /packages ");
      var package= req.body.quanty;
-    db.update({code: actu},{$set:{quanty:package}},{multi:true}, (err) => {
+    db.update({code: actu},{$set:{quanty:package },{multi:true}, (err) => {
        if(err){
             console.log(Date() + "-" + err);
             res.sendStatus(500);
@@ -73,10 +73,7 @@ app.put(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
 
 // METODO DELETE PARA BORRAR TODOS LOS PAQUETES
 app.delete(BASE_API_PATH + '/packages', (req, res)=>{
-    //var producte = productes.find(a =>a.categoria===parseInt(req.params.categoria));
-    //var index =productes.indexOf(producte);
-    //productes.splice(index, 1);
-    //res.send()
+    
     db.remove({},{multi:true},(err)=>{
 
         if(err){

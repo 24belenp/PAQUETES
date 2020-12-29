@@ -64,6 +64,7 @@ app.put(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
             res.sendStatus(500);
         } else {
              res.sendStatus(201);
+             console.log("Se actualizo correctamente")
         }
     });
 

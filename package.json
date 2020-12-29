@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "API Packages",
   "main": "index.js",
-  "repository":{
+  "repository": {
     "type": "git",
     "url": "https://github.com/24belenp/PAQUETES.git"
   },
@@ -15,6 +15,7 @@
   "author": "Belén Paredes",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nedb": "^1.8.0"
   }
 }

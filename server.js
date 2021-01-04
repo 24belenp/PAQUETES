@@ -1,28 +1,16 @@
+const db = require('./db.js');
 var express = require('express');
 var bodyParser = require('body-parser');
-var DataStore = require('nedb');
 
-var port = (process.env.PORT || 4050);
 var BASE_API_PATH = "/api/v1";
-var DB_FILE_NAME= __dirname + "/packages.json";
-
-console.log("starting API server...");
-
 
 var app= express();
 app.use(bodyParser.json());
 
-var db = new DataStore({
-    filename: DB_FILE_NAME,
-    autoload: true
-});
-
 app.get("/", (req, res) => {
-res.send("<html><body><h1>My server</h1></body></html>");
-});
+res.send("<html><body><h1>My server</h1></body></html>");});
 
 // METODO GET PARA CONSULTAR ELEMENTOS DE PAQUETE
-
 app.get(BASE_API_PATH + "/packages", (req, res) => {
     console.log(Date() + " - GET /packages");
     db.find({},(err, packages) =>{
@@ -107,7 +95,4 @@ app.delete(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
 
 });
 
-
-app.listen(port);
-
-console.log("Server ready!"); 
+module.exports = app;

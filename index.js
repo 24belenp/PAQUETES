@@ -1,4 +1,3 @@
-  
 const app = require('./server.js');
 
 var port = (process.env.PORT || 4050);

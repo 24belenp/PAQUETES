@@ -58,19 +58,24 @@ app.put(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
     var actu = req.params.code; 
     console.log(Date() + " - PUT /packages ");
      var package= req.body.quanty;
+
     db.update({code: actu},{$set:{quanty:package }},{multi:true}, (err) => {
+
+
        if(err){
             console.log(Date() + "-" + err);
             res.sendStatus(500);
         } else {
              res.sendStatus(201);
+
             console.log("Se actualizo correctamente")
+
+             console.log("Se actualizo correctamente")
+
         }
     });
 
 });
-
-
 
 
 // METODO DELETE PARA BORRAR TODOS LOS PAQUETES
@@ -110,4 +115,4 @@ app.delete(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
 
 app.listen(port);
 
-console.log("Server ready!"); 
+console.log("Server ready!");

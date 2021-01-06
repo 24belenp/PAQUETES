@@ -58,7 +58,7 @@ app.put(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
     var actu = req.params.code; 
     console.log(Date() + " - PUT /packages ");
      var package= req.body.quanty;
-    db.update({code: actu},{$set:{quanty:package },{multi:true}, (err) => {
+    db.update({code: actu},{$set:{quanty:package }},{multi:true}, (err) => {
        if(err){
             console.log(Date() + "-" + err);
             res.sendStatus(500);

@@ -11,7 +11,7 @@ RUN npm install
 COPY index.js .
 COPY server .
 COPY db .
-COPY package .
+COPY packages .
 
 EXPOSE 4050
 

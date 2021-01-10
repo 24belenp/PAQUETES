@@ -1,2 +1,3 @@
 # PACKAGES
-Este repositorio contiene código del microservicio de Package de FIS 2020
+
+This repository contains code for the FIS 2020 Package microservice

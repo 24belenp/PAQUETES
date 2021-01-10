@@ -7,7 +7,7 @@ services:
 before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
 install:
-  - npm install 
+  - npm install
 script:
   - docker build -t packages .
 deploy:

@@ -17,10 +17,5 @@ dbConnect().then(
     }
 )
 
-console.log("Starting API server at "+port);
 
-
-app.listen(port);
-
-console.log("Server ready!");
 

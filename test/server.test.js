@@ -29,12 +29,12 @@ describe("Packages API", () =>{
     describe("GET /packages", () =>{
         beforeAll(() => {
             const packages = [
-                new Paackage (
+                new Package (
                 {"code": "1ab",
                 "order":"20011",
                 "orderdelivery_date":"15/01/21",
                 "quantity": "20"}),
-                new Paackage ({"code": "2ab",
+                new Package ({"code": "2ab",
                 "order":"212",
                 "orderdelivery_date":"15/01/21",
                 "quantity": "200"})

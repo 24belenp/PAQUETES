@@ -1,14 +1,17 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var BASE_API_PATH = "/api/v1";
-const Package = require ('./package');
+const Package = require ('./packages');
+
+
 
 var app= express();
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-res.send("<html><body><h1>My server</h1></body></html>");});
-
+//res.send("<html><body><h1>My server</h1></body></html>");});
+res.send("<html><body><h1>Packages V2 - Online Store</h1></body></html>");
+});
 // METODO GET PARA CONSULTAR ELEMENTOS DE PAQUETE
 app.get(BASE_API_PATH + "/packages", (req, res) => {
     console.log(Date() + " - GET /packages");

@@ -1,11 +1,34 @@
 const mongoose = require('mongoose');
 
 const packageSchema = new mongoose.Schema({
-    code: String,
-    
-    quantity: Number,
-    order:String,
-    delivery_date: String
+
+
+    code: { 
+        type: String,
+        required: [true, "Package code required"] 
+        // minlength: [25, "Minimun code length 25 characters"],
+    },
+     
+    quantity: {
+         type: Number,
+        required: [true, "quantity required"],
+         min: [1, "Minimun quantity is one"],
+    },
+
+    delivery_date: {
+        type: Date,
+       required: [true, "Delivery date required"],
+   },
+
+
+   status: {
+    type: String, enum:['delivered','Undelivered'],
+   required: [true, "Status required"],
+},
+
+
+
+   // order:String
 });
 
 packageSchema.methods.cleanup = function() {
@@ -13,7 +36,7 @@ packageSchema.methods.cleanup = function() {
 
     code: this.code,
     quantity: this.quantity,
-    order: this.order,
+    status: this.status,
     delivery_date: this.delivery_date
 
     };

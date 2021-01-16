@@ -10,7 +10,7 @@ var app= express();
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-res.send("<html><body><h1>My server</h1></body></html>");});
+res.send("<html><body><h1>PACKAGES</h1></body></html>");});
 
 // METODO GET PARA CONSULTAR ELEMENTOS DE PAQUETE
 app.get(BASE_API_PATH + "/packages", (req, res) => {

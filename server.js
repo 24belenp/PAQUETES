@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var BASE_API_PATH = "/api/v1";
 const Package = require ('./packages');
+const ProductsResource = require('./productsResource');
 
 
 
@@ -108,4 +109,18 @@ app.delete(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
 
 });
 
+
+
+app. get(BASE_API_PATH + "/products", (req,response) => {
+    console.log("GET/products");
+
+    ProductsResource.getAllProducts()
+        .then((body) => {
+            response.send(body);
+        })
+        .catch((error) => {
+            console.log("error:" + error);
+            response.sendStatus(500);
+        })
+})
 module.exports = app;

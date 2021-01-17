@@ -21,10 +21,10 @@ const packageSchema = new mongoose.Schema({
    },
 
 
-   status: {
-    type: String, enum:['delivered','Undelivered'],
-   required: [true, "Status required"],
-},
+   statuss: {
+        type: String,
+        required: [true, "Status required"],
+    },
 
 
 
@@ -36,7 +36,7 @@ packageSchema.methods.cleanup = function() {
 
     code: this.code,
     quantity: this.quantity,
-    status: this.status,
+    statuss: this.statuss,
     delivery_date: this.delivery_date
 
     };

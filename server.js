@@ -59,12 +59,13 @@ app.put(BASE_API_PATH + "/packages/:id",(req,res)=>{
             paackage.code= req.body.code;
             paackage.quantity= req.body.cuantity;
             paackage.delivery_date= req.body.delivery_date;
-            paackage.order= req.body.order;
+            paackage.statuss= req.body.statuss;
                   
 
             paackage.save((err, paackage) =>{
                 if(err){
                     console.log(Date()+ " - "+err);
+
                     res.status(500);
                 }else{
                     console.log(Date()+" - PUT /packages/"+req.params.id + " package have been updated");

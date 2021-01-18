@@ -12,7 +12,7 @@ COPY server.js .
 COPY db.js .
 COPY packages.js .
 
-COPY ordersResource .
+COPY ordersResource.js .
 
 EXPOSE 4050
 

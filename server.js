@@ -2,8 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var BASE_API_PATH = "/api/v1";
 const Package = require ('./packages');
-const ProductsResource = require('./productsResource');
-
+const OrdersResource = require('./ordersResource');
 
 
 var app= express();
@@ -107,9 +106,7 @@ app.delete(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
              res.sendStatus(201);
         }
     });
-
 });
-
 
 
 app. get(BASE_API_PATH + "/products", (req,response) => {
@@ -122,6 +119,37 @@ app. get(BASE_API_PATH + "/products", (req,response) => {
         .catch((error) => {
             console.log("error:" + error);
             response.sendStatus(500);
-        })
+        })        
 })
+
+//intregracion
+
+app.get(BASE_API_PATH+ "/orders", (req,response)=>{
+  console.log("GET /orders");
+
+    OrdersResource.getAllOrders()
+        .then((body)=>{
+            response.send(body);
+        })
+        .catch((error)=>{
+            console.log("error: "+error);
+            response.sendStatus(500);
+        })
+});
+
+//app.put(BASE_API_PATH+ "/clients/:cif/update", (req,response)=>{
+
+  //  console.log("update status");
+    //var data= req.body;
+
+    //ClientsResource.putStockProveedor(req.params.cif, data)
+      //  .then((body)=>{
+        //    response.send(body);
+        //})
+        //.catch((error)=>{
+          //  console.log("error: "+error);
+            //response.sendStatus(500);
+        //})
+//});
+
 module.exports = app;

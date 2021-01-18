@@ -12,6 +12,8 @@ COPY server.js .
 COPY db.js .
 COPY packages.js .
 
+COPY ordersResource .
+
 EXPOSE 4050
 
 CMD npm start

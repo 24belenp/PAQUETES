@@ -122,9 +122,9 @@ app. get(BASE_API_PATH + "/products", (req,response) => {
         })        
 })
 
-//intregracion
+//intregracion con Orders
 
-app.get(BASE_API_PATH+ "/orders", (req,response)=>{
+app.get(BASE_API_PATH+ "/orders"+"/:id", (req,response)=>{
   console.log("GET /orders");
 
     OrdersResource.getAllOrders()
@@ -135,6 +135,40 @@ app.get(BASE_API_PATH+ "/orders", (req,response)=>{
             console.log("error: "+error);
             response.sendStatus(500);
         })
+
+        //if response provedor1 
+});
+
+////intregracion con clientes
+
+app.put(BASE_API_PATH + "/packages/:code",(req,res)=>{
+    console.log(Date() + " - PUT /packages/" + req.params.id);
+    Package.findOne({code: req.params.code}, (err, paackage)=>{
+        if(err){
+            console.log(Date()+ " - "+err);
+            res.sendStatus(500);
+        }else if(!paackage){
+            console.log(Date()+" - PUT /packages/"+req.params.id + " Error: package not found");
+            res.sendStatus(404);
+        }else{
+            
+            paackage.statuss= req.body.statuss;
+                  
+
+            Package.save((err, paackage) =>{
+                if(err){
+                    console.log(Date()+ " - "+err);
+
+                    res.status(500);
+                }else{
+                    console.log(Date()+" - PUT /packages/"+req.params.id + " status have been updated");
+                    res.status(200);
+                    return res.send(paackage.cleanup());
+                }
+            })
+        }
+        
+    })
 });
 
 //app.put(BASE_API_PATH+ "/clients/:cif/update", (req,response)=>{

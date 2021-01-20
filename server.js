@@ -43,8 +43,6 @@ app.post(BASE_API_PATH + "/packages",(req, res) => {
    
 });
 
-
-
 app.put(BASE_API_PATH + "/packages/:id",(req,res)=>{
     console.log(Date() + " - PUT /packages/" + req.params.id);
     Package.findOne({_id: req.params.id}, (err, paackage)=>{
@@ -56,7 +54,7 @@ app.put(BASE_API_PATH + "/packages/:id",(req,res)=>{
             res.sendStatus(404);
         }else{
             paackage.code= req.body.code;
-            paackage.quantity= req.body.cuantity;
+            paackage.quantity= req.body.quantity;
             paackage.delivery_date= req.body.delivery_date;
             paackage.statuss= req.body.statuss;
                   
@@ -93,8 +91,7 @@ app.delete(BASE_API_PATH + "/packages", (req, res) => {
     });
 });
 
-
-//METODO DELETE PARA BORRRAR UN REGISTRO EN ESPECIFICO POR SU CODE
+//METODO DELETE PARA BORRAR UN REGISTRO EN ESPECIFICO POR SU CODE
 app.delete(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
     var actu = req.params.code; 
     console.log(Date() + " - DELETE /packages ");
@@ -107,7 +104,6 @@ app.delete(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
         }
     });
 });
-
 
 app. get(BASE_API_PATH + "/products", (req,response) => {
     console.log("GET/products");

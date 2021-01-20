@@ -2,17 +2,22 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var BASE_API_PATH = "/api/v1";
 const Package = require ('./packages');
+const passport = require('passport')
 const OrdersResource = require('./ordersResource');
+require('./passport.js');
 
 
 var app= express();
 app.use(bodyParser.json());
+app.use(passport.initialize());
 
 app.get("/", (req, res) => {
 res.send("<html><body><h1>PACKAGES</h1></body></html>");});
 
 // METODO GET PARA CONSULTAR ELEMENTOS DE PAQUETE
-app.get(BASE_API_PATH + "/packages", (req, res) => {
+app.get(BASE_API_PATH + "/packages", 
+passport.authenticate('localapikey', {session:false}),
+(req, res) => {
     console.log(Date() + " - GET /packages");
 
     Package.find({},(err, packages) =>{

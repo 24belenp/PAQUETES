@@ -16,7 +16,7 @@ const packageSchema = new mongoose.Schema({
     },
 
     delivery_date: {
-        type: Date,
+        type: String,
        required: [true, "Delivery date required"],
    },
 

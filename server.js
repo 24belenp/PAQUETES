@@ -124,7 +124,7 @@ app. get(BASE_API_PATH + "/products", (req,response) => {
 
 //intregracion con Orders
 
-app.get(BASE_API_PATH+ "/orders"+"/:id", (req,response)=>{
+app.get(BASE_API_PATH+ "/orders", (req,response)=>{
   console.log("GET /orders");
 
     OrdersResource.getAllOrders()
@@ -136,7 +136,7 @@ app.get(BASE_API_PATH+ "/orders"+"/:id", (req,response)=>{
             response.sendStatus(500);
         })
 
-        //if response provedor1 
+        
 });
 
 ////intregracion con clientes

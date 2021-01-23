@@ -3,7 +3,7 @@ request = require('request-promise-native').defaults({json:true});
 
 class  OrdersResource {
     static  OrdersUrl(resourceUrl){
-        const packagesServer = (process.env.PACKAGES_URL || 'http://host.docker.internal:3000/api/v2');
+        const packagesServer = (process.env.PACKAGES_URL || 'http://host.docker.internal:3000/api/v1');
         return urljoin(packagesServer,resourceUrl);
     }
 

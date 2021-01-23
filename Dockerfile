@@ -11,7 +11,8 @@ COPY index.js .
 COPY server.js .
 COPY db.js .
 COPY packages.js .
-
+COPY apikeys.js .
+COPY passport.js .
 COPY ordersResource.js .
 
 EXPOSE 4050

@@ -11,8 +11,13 @@ var app= express();
 app.use(bodyParser.json());
 app.use(passport.initialize());
 
-app.get("/", (req, res) => {
-res.send("<html><body><h1>PACKAGES</h1></body></html>");});
+
+
+app.get("/",
+passport.authenticate('localapikey', {session: false}),
+(req, res) => {
+res.send("<html><body><h1>PACKAGES</h1></body></html>");
+});
 
 // METODO GET PARA CONSULTAR ELEMENTOS DE PAQUETE
 app.get(BASE_API_PATH + "/packages", 
@@ -50,18 +55,18 @@ app.post(BASE_API_PATH + "/packages",(req, res) => {
 
 
 
-app.put(BASE_API_PATH + "/packages/:id",(req,res)=>{
-    console.log(Date() + " - PUT /packages/" + req.params.id);
-    Package.findOne({_id: req.params.id}, (err, paackage)=>{
+app.put(BASE_API_PATH + "/packages/:code",(req,res)=>{
+    console.log(Date() + " - PUT /packages/" + req.params.code);
+    Package.findOne({code: req.params.code}, (err, paackage)=>{
         if(err){
             console.log(Date()+ " - "+err);
             res.sendStatus(500);
         }else if(!paackage){
-            console.log(Date()+" - PUT /packages/"+req.params.id + " Error: package not found");
+            console.log(Date()+" - PUT /packages/"+req.params.code + " Error: package not found");
             res.sendStatus(404);
         }else{
             paackage.code= req.body.code;
-            paackage.quantity= req.body.cuantity;
+            paackage.quantity= req.body.quantity;
             paackage.delivery_date= req.body.delivery_date;
             paackage.statuss= req.body.statuss;
                   
@@ -72,7 +77,7 @@ app.put(BASE_API_PATH + "/packages/:id",(req,res)=>{
 
                     res.status(500);
                 }else{
-                    console.log(Date()+" - PUT /packages/"+req.params.id + " package have been updated");
+                    console.log(Date()+" - PUT /packages/"+req.params.code + " package have been updated");
                     res.status(200);
                     return res.send(paackage.cleanup());
                 }
@@ -114,18 +119,6 @@ app.delete(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
 });
 
 
-app. get(BASE_API_PATH + "/products", (req,response) => {
-    console.log("GET/products");
-
-    ProductsResource.getAllProducts()
-        .then((body) => {
-            response.send(body);
-        })
-        .catch((error) => {
-            console.log("error:" + error);
-            response.sendStatus(500);
-        })        
-})
 
 //intregracion con Orders
 
@@ -147,13 +140,13 @@ app.get(BASE_API_PATH+ "/orders", (req,response)=>{
 ////intregracion con clientes
 
 app.put(BASE_API_PATH + "/packages/:code",(req,res)=>{
-    console.log(Date() + " - PUT /packages/" + req.params.id);
+    console.log(Date() + " - PUT /packages/" + req.params.code);
     Package.findOne({code: req.params.code}, (err, paackage)=>{
         if(err){
             console.log(Date()+ " - "+err);
             res.sendStatus(500);
         }else if(!paackage){
-            console.log(Date()+" - PUT /packages/"+req.params.id + " Error: package not found");
+            console.log(Date()+" - PUT /packages/"+req.params.code + " Error: package not found");
             res.sendStatus(404);
         }else{
             
@@ -166,7 +159,7 @@ app.put(BASE_API_PATH + "/packages/:code",(req,res)=>{
 
                     res.status(500);
                 }else{
-                    console.log(Date()+" - PUT /packages/"+req.params.id + " status have been updated");
+                    console.log(Date()+" - PUT /packages/"+req.params.code + " status have been updated");
                     res.status(200);
                     return res.send(paackage.cleanup());
                 }

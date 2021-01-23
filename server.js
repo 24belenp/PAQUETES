@@ -58,6 +58,8 @@ app.post(BASE_API_PATH + "/packages",(req, res) => {
 app.put(BASE_API_PATH + "/packages/:code",(req,res)=>{
     console.log(Date() + " - PUT /packages/" + req.params.code);
     Package.findOne({code: req.params.code}, (err, paackage)=>{
+
+
         if(err){
             console.log(Date()+ " - "+err);
             res.sendStatus(500);
@@ -103,8 +105,7 @@ app.delete(BASE_API_PATH + "/packages", (req, res) => {
     });
 });
 
-
-//METODO DELETE PARA BORRRAR UN REGISTRO EN ESPECIFICO POR SU CODE
+//METODO DELETE PARA BORRAR UN REGISTRO EN ESPECIFICO POR SU CODE
 app.delete(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
     var actu = req.params.code; 
     console.log(Date() + " - DELETE /packages ");

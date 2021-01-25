@@ -2,6 +2,7 @@ const app = require('../server.js');
 const Package = require('../packages.js');
 const request = require('supertest');
 const  { respuesta , consulta }  =  require ( 'express' ) ;
+const ApiKey = require('../apikeys.js');
 const { query } = require('express');
 
 
@@ -36,21 +37,34 @@ describe("Packages API", () =>{
                 {"code": "1ab",
                 "statuss":"delivered",
                 "orderdelivery_date":"15/01/21",
-                "quantity": "20"}),
+                "statuss": "delivery"}),
                 new Package ({"code": "2ab",
                 "order":"212",
                 "orderdelivery_date":"15/01/21",
-                "quantity": "200"})
+                "statuss": "delivery"})
             ];
+
+            const user = {
+                user: "test",
+                apikey: "1"
+            }
+
+
 
             dbFind = jest.spyOn(Package, "find");
             dbFind.mockImplementation((query, callback) => {
                 callback(null, paackages);
             });
+
+            auth = jest.spyOn(ApiKey, "findOne");
+            auth.mockImplementation((query, callback) => {
+                callback(null, new ApiKey(user));
+            })
+
         });
     
-        it('Should return all contacts', () => {
-            return  request(app).get('/api/v1/packages').then((response) =>{
+        it('Should return all packages', () => {
+            return  request(app).get('/api/v1/packages').set('apikey', '1').then((response) =>{
                 expect(response.statusCode).toBe(200);
                 expect(response.body).toBeArrayOfSize(2);
                 expect(dbFind).toBeCalledWith({}, expect.any(Function));
@@ -64,13 +78,13 @@ describe("Packages API", () =>{
             const paackage = {code: "2ab",
                              order:"185",
                              orderdelivery_date: "25/01/21",
-                            quantity: "200"};
+                            statuss: "delivery"};
 
             beforeEach(() => {
             dbInsert = jest.spyOn(Package, "create");
             });
 
-            it('Should add a new contact if everything is fine', () => {
+            it('Should add a new packages if everything is fine', () => {
                 dbInsert.mockImplementation((c, callback) =>{
                     callback(false);
                 });

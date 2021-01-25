@@ -5,7 +5,10 @@ const packageSchema = new mongoose.Schema({
 
     code: { 
         type: String,
-        required: [true, "Package code required"] 
+        required: [true, "Package code required"], 
+        //unique: true,
+        minlength: [1, "Minimun code length 1 characters"],
+        maxlength: [7, "Maximum code length 1 characters"]
         // minlength: [25, "Minimun code length 25 characters"],
     },
      
@@ -17,18 +20,16 @@ const packageSchema = new mongoose.Schema({
 
     delivery_date: {
         type: String,
-       required: [true, "Delivery date required"],
+       // default: Date.now
    },
 
 
    statuss: {
         type: String,
         required: [true, "Status required"],
+        enum:['delivered','undelivered']
     },
 
-
-
-   // order:String
 });
 
 packageSchema.methods.cleanup = function() {

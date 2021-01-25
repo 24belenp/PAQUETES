@@ -55,17 +55,19 @@ app.post(BASE_API_PATH + "/packages",(req, res) => {
 
 
 
-app.put(BASE_API_PATH + "/packages/:code",(req,res)=>{
-    console.log(Date() + " - PUT /packages/" + req.params.code);
-    Package.findOne({code: req.params.code}, (err, paackage)=>{
 
+app.put(BASE_API_PATH + "/packages" + "/:code", (req,res)=>{
+    console.log(Date() + " - PUT /packages/" + req.params.code);
+    Package.updateOne({code: req.params.code}, (err, paackage)=>{
 
         if(err){
             console.log(Date()+ " - "+err);
             res.sendStatus(500);
         }else if(!paackage){
             console.log(Date()+" - PUT /packages/"+req.params.code + " Error: package not found");
-            res.sendStatus(404);
+
+            res.sendStatus(200);
+
         }else{
             paackage.code= req.body.code;
             paackage.quantity= req.body.quantity;
@@ -140,8 +142,10 @@ app.get(BASE_API_PATH+ "/orders", (req,response)=>{
 
 ////intregracion con clientes
 
+
 app.put(BASE_API_PATH + "/packages/:code",(req,res)=>{
     console.log(Date() + " - PUT /packages/" + req.params.code);
+
     Package.findOne({code: req.params.code}, (err, paackage)=>{
         if(err){
             console.log(Date()+ " - "+err);

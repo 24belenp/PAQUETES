@@ -56,45 +56,6 @@ app.post(BASE_API_PATH + "/packages",
 });
 
 
-
-//app.put(BASE_API_PATH + "/packages/:code",
-  //  passport.authenticate('localapikey', {session: false}),
-   // (req,res)=>{
-    //console.log(Date() + " - PUT /packages/" + req.params.code);
-   // Package.findOne({code: req.params.code}, (err, paackage)=>{
-
-
-     //   if(err){
-       //     console.log(Date()+ " - "+err);
-         //   res.sendStatus(500);
-        //}else if(!paackage){
-          //  console.log(Date()+" - PUT /packages/"+req.params.code + " Error: package not found");
-            //res.sendStatus(200);
-        //}else{
-          //  paackage.code= req.body.code;
-            //paackage.quantity= req.body.quantity;
-            //paackage.delivery_date= req.body.delivery_date;
-            //paackage.statuss= req.body.statuss;
-                  
-
-            //paackage.save((err, paackage) =>{
-              //  if(err){
-                //    console.log(Date()+ " - "+err);
-
-                  //  res.status(500);
-                //}else{
-                  //  console.log(Date()+" - PUT /packages/"+req.params.code + " package have been updated");
-                    //res.status(200);
-                    //return res.send(paackage.cleanup());
-                //}
-           // })
-        //}
-        
-   //})
-//});
-
-
-
 app.put(BASE_API_PATH + "/packages" + "/:code",
     passport.authenticate('localapikey', {session: false}),
     (req, res) => {
@@ -155,37 +116,10 @@ app.delete(BASE_API_PATH + "/packages" + "/:code",
 
 ////intregracion con clientes
 
-//app.put(BASE_API_PATH + "/packages/:code",(req,res)=>{
-  //  console.log(Date() + " - PUT /packages/" + req.params.code);
-    //Package.findOne({code: req.params.code}, (err, paackage)=>{
-      //  if(err){
-        //    console.log(Date()+ " - "+err);
-          //  res.sendStatus(500);
-        //}else if(!paackage){
-          //  console.log(Date()+" - PUT /packages/"+req.params.code + " Error: package not found");
-            //res.sendStatus(404);
-        //}else{
-            
-          //  paackage.statuss= req.body.statuss;
-                  
 
-            //Package.save((err, paackage) =>{
-              //  if(err){
-                //    console.log(Date()+ " - "+err);
 
-                  //  res.status(500);
-                //}else{
-                  //  console.log(Date()+" - PUT /packages/"+req.params.code + " status have been updated");
-                    //res.status(200);
-                    //return res.send(paackage.cleanup());
-                //}
-           // })
-       // }
-        
-    //})
-//});
 
-//app.put(BASE_API_PATH+ "/clients/:cif/update", (req,response)=>{
+//app.put(BASE_API_PATH+ "/clients/:code/update", (req,response)=>{
 
   //  console.log("update status");
     //var data= req.body;

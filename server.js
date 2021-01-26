@@ -62,6 +62,8 @@ app.put(BASE_API_PATH + "/packages/:code",
     (req,res)=>{
     console.log(Date() + " - PUT /packages/" + req.params.code);
     Package.findOne({code: req.params.code}, (err, paackage)=>{
+
+
         if(err){
             console.log(Date()+ " - "+err);
             res.sendStatus(500);
@@ -114,6 +116,7 @@ app.delete(BASE_API_PATH + "/packages",
 app.delete(BASE_API_PATH + "/packages" + "/:code",
     passport.authenticate('localapikey', {session: false}),
     (req, res) => {
+
     var actu = req.params.code; 
     console.log(Date() + " - DELETE /packages ");
     Package.deleteOne({code: actu}, (err) => {

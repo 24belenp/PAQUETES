@@ -1,6 +1,7 @@
 const app = require('../server.js');
-const Package = require('../packages');
+const Package = require('../packages.js');
 const request = require('supertest');
+const  { respuesta , consulta }  =  require ( 'express' ) ;
 const ApiKey = require('../apikeys.js');
 const { query } = require('express');
 
@@ -31,10 +32,10 @@ describe("Packages API", () =>{
 
     describe("GET /packages", () =>{
         beforeAll(() => {
-            const packages = [
+            const paackages = [
                 new Package (
                 {"code": "1ab",
-                "order":"20011",
+                "statuss":"delivered",
                 "orderdelivery_date":"15/01/21",
                 "statuss": "delivery"}),
                 new Package ({"code": "2ab",
@@ -52,7 +53,7 @@ describe("Packages API", () =>{
 
             dbFind = jest.spyOn(Package, "find");
             dbFind.mockImplementation((query, callback) => {
-                callback(null, packages);
+                callback(null, paackages);
             });
 
             auth = jest.spyOn(ApiKey, "findOne");
@@ -72,6 +73,7 @@ describe("Packages API", () =>{
     });
 
     describe('POST /packages', () => {
+        
             let dbInsert;
             const paackage = {code: "2ab",
                              order:"185",
@@ -101,8 +103,87 @@ describe("Packages API", () =>{
                 expect(response.statusCode).toBe(500);
             });
             });
+    
+    });
 
-       
+
+    describe('DELETE /packages', () => {
+        
+        beforeEach(() => {
+            dbRemove = jest.spyOn(Package, "deleteMany");
+        });
+
+        it('Should delete all packages', () => {
+            dbRemove.mockImplementation((query,a, callback) =>{
+                callback(false);
+            });
+
+            return request(app).delete('/api/v1/packages')
+            .then((response) =>{
+                expect(response.statusCode).toBe(200);
+                expect(response.body).toBeNaN();
+                expect(dbRemove).toBeCalledWith({}, {multi: true}, expect.any(Function));
+            });
+        });
+
+        it('Shoul return an error in DB',() => {
+            dbRemove.mockImplementation((query, a, callback) => {
+                callback(true);
+            });
+            return request(app).delete('/api/v1/packages')
+            .then((response) => {
+                expect(response.statusCode).toBe(500);
+            });
+        });
+    });
+
+
+    describe('PUT /package', () => {
+        let dbUpdate;
+        
+        const paackage = {code: "abc",
+        statuss:"delivery",
+        orderdelivery_date: "25/01/21",
+        quantity: "200"}
+        ;
+
+        beforeEach(() => {
+            dbUpdate = jest.spyOn(Package, 'updateOne');
+        });
+
+        it('Should update a one package', () => {
+            dbUpdate.mockImplementation((query, callback) => {
+                callback(false);
+            });
+
+            return request(app).put('/api/v1/packages/abc')
+            .send(paackage)
+            .then((response) => {
+                expect(response.statusCode).toBe(200);
+            });
+        });
+
+        it('Should return an error in DB', () => {
+            dbUpdate.mockImplementation((query, callback) => {
+                callback(true);
+            });
+
+            return request(app).put('/api/v1/packages/abc')
+            .send(paackage)
+            .then((response) => {
+                expect(response.statusCode).toBe(500);
+            });
+        });
+
     });
 
 });
+
+
+
+
+
+
+
+
+    

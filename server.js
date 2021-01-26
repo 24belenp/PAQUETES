@@ -39,7 +39,9 @@ passport.authenticate('localapikey', {session:false}),
 
 });
 // METODO POST PARA CREAR ELEMENTOS DE PAQUETE
-app.post(BASE_API_PATH + "/packages",(req, res) => {
+app.post(BASE_API_PATH + "/packages",
+    passport.authenticate('localapikey', {session: false}), 
+    (req, res) => {
     console.log(Date() + " - POST / packages");
     var paackage= req.body;
     Package.create(paackage, (err) => {
@@ -55,7 +57,9 @@ app.post(BASE_API_PATH + "/packages",(req, res) => {
 
 
 
-app.put(BASE_API_PATH + "/packages/:code",(req,res)=>{
+app.put(BASE_API_PATH + "/packages/:code",
+    passport.authenticate('localapikey', {session: false}),
+    (req,res)=>{
     console.log(Date() + " - PUT /packages/" + req.params.code);
     Package.findOne({code: req.params.code}, (err, paackage)=>{
         if(err){
@@ -91,7 +95,9 @@ app.put(BASE_API_PATH + "/packages/:code",(req,res)=>{
 // METODO DELETE PARA BORRAR TODOS LOS REGISTROS INGRESADOS CON POST
 
 
-app.delete(BASE_API_PATH + "/packages", (req, res) => {
+app.delete(BASE_API_PATH + "/packages",
+    passport.authenticate('localapikey', {session: false}),
+    (req, res) => {
     console.log(Date() + "- DELETE /packages");
     Package.deleteMany({}, {multi: true}, (err) => {
         if (err) {
@@ -105,7 +111,9 @@ app.delete(BASE_API_PATH + "/packages", (req, res) => {
 
 
 //METODO DELETE PARA BORRRAR UN REGISTRO EN ESPECIFICO POR SU CODE
-app.delete(BASE_API_PATH + "/packages" + "/:code" ,(req, res) => {
+app.delete(BASE_API_PATH + "/packages" + "/:code",
+    passport.authenticate('localapikey', {session: false}),
+    (req, res) => {
     var actu = req.params.code; 
     console.log(Date() + " - DELETE /packages ");
     Package.deleteOne({code: actu}, (err) => {

@@ -27,7 +27,7 @@ const packageSchema = new mongoose.Schema({
    statuss: {
         type: String,
         required: [true, "Status required"],
-        enum:['delivered','undelivered']
+       // enum:['delivered','undelivered']
     },
 
 });

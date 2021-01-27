@@ -1,14 +1,19 @@
 sudo: required
 language: node_js
 node_js:
-  - "9"
+  - "lts/*"
 services:
   - docker
+  - mongodb
+env:
+  - MONGO_URL=$MONGO_URL
+  
 before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
 install:
   - npm install
 script:
+  - npm test
   - docker build -t packages .
 deploy:
   provider: script

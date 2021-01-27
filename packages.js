@@ -6,10 +6,10 @@ const packageSchema = new mongoose.Schema({
     code: { 
         type: String,
         required: [true, "Package code required"], 
-        //unique: true,
+        
         minlength: [1, "Minimun code length 1 characters"],
-        maxlength: [7, "Maximum code length 1 characters"]
-        // minlength: [25, "Minimun code length 25 characters"],
+        maxlength: [9, "Maximum code length 1 characters"]
+        
     },
      
     quantity: {
@@ -20,7 +20,7 @@ const packageSchema = new mongoose.Schema({
 
     delivery_date: {
         type: String,
-       // default: Date.now
+       
    },
 
 

@@ -11,7 +11,7 @@ describe('DB connection', () => {
         
         await dbConnect();
     })
-//const url = 'mongodb://db/test'
+
     beforeEach((done) => {
         Package.deleteMany({}, (err) => {
             done();

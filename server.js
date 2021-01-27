@@ -73,7 +73,22 @@ app.put(BASE_API_PATH + "/packages" + "/:code",
      });
 });
 
+// METODO DELETE PARA BORRAR TODOS LOS REGISTROS INGRESADOS CON POST
 
+
+app.delete(BASE_API_PATH + "/packages",
+    passport.authenticate('localapikey', {session: false}),
+    (req, res) => {
+    console.log(Date() + "- DELETE /packages");
+    Package.deleteMany({}, {multi: true}, (err) => {
+        if (err) {
+            console.log(Date() + " - " + err);
+            res.sendStatus(500);
+        } else {
+            res.sendStatus(200);
+        }
+    });
+});
 
 
 
